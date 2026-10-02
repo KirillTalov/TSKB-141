@@ -57,7 +57,7 @@ int main()
             break;
         default:
             printf("Unknown formula");
-            break;
+            exit(1);
     }
     return 0;
 }
