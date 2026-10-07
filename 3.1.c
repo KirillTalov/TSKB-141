@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 /**
  * @brief Вычисляет значение функции по заданной формуле
  * @param x - значение переменной x
  * @return Расчитанное значение
  */
-double Y(double x);
+double Y(const double x);
 /**
  * @brief Считывает с клавиатуры значение с плавающей точкой
  * @return Считанное значение
@@ -17,7 +18,6 @@ double getDouble();
  */
 int main()
 {
-    double x;
     printf("Введите начало интервала (1):\n");
     double beginning = getDouble();
     printf("Введите конец интервала (2):\n");
@@ -25,7 +25,7 @@ int main()
     printf("Введите шаг интервала (0.1):\n");
     double step = getDouble();
     printf("x\t\t\tY\n");
-    for (x = beginning; x <= end + 1e-9; x += step)
+    for (double x = beginning; x <= end + 1e-9; x += step)
     {
         if (x <= 0)
         {
@@ -38,13 +38,17 @@ int main()
     }
     return 0;
 }
-double Y(double x)
+double Y(const double x)
 {
     return 0.1*pow(x,2)-x*log(x);
 }
 double getDouble()
 {
     double val = 0.0;
-    scanf("%lf",&val);
+    if (scanf("%lf",&val) != 1)
+    {
+        printf("Ошибка");
+        exit(1);
+    }
     return val;
 }
